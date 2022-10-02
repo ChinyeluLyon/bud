@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled, { css } from "styled-components";
 
 const brandColour = css`
@@ -105,4 +106,17 @@ export const FilterButton = styled.button`
     color: white;
     border: solid 3px white;
   }
+`;
+
+export const Loading = styled(FontAwesomeIcon)`
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  animation: spin 4s infinite linear;
 `;

@@ -7,10 +7,6 @@ type TransactionProps = {
 };
 
 const TransactionComponent = ({ transaction }: TransactionProps) => {
-  if (!transaction) {
-    return <>loading...</>;
-  }
-
   const amount = handleAmount(
     transaction.amount.value,
     transaction.amount.currency_iso

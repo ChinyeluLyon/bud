@@ -7,6 +7,7 @@ import {
   faCircleDot,
   faCircleUp,
   faCircleDown,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 
 const TransactionFilter = () => {
@@ -14,6 +15,7 @@ const TransactionFilter = () => {
   const [selectedTransactions, setSelectedTransactions] = useState<
     Transaction[]
   >([]);
+  const [loading, setLoading] = useState(true);
 
   const getData = async () => {
     fetch("http://www.mocky.io/v2/5c62e7c33000004a00019b05")
@@ -22,6 +24,7 @@ const TransactionFilter = () => {
       })
       .then(function (data) {
         console.log(data);
+        setLoading(false);
         setApiData(data);
       })
       .catch(function () {
@@ -48,81 +51,87 @@ const TransactionFilter = () => {
       <S.Header>
         <h1>Chinyelu's Transaction Filter</h1>
       </S.Header>
-      <S.ProviderWrapper>
-        <S.ProviderHeader>
-          <h1>
-            {apiData?.provider.title} - {apiData?.provider.description}
-          </h1>
-          <h1>
-            {handleAmount(
-              apiData?.balance.amount,
-              apiData?.balance.currency_iso
-            )}
-          </h1>
-        </S.ProviderHeader>
-        <S.AccountDetails>
-          <p>
-            <b>Sort Code:</b> {apiData?.provider.sort_code}
-          </p>
-          <p>
-            <b>Account Number:</b> {apiData?.provider.account_number}
-          </p>
-        </S.AccountDetails>
-        <S.ProviderButtons>
-          <S.ButtonAndText>
-            <S.FilterButton
-              onClick={() => {
-                const htl = [...selectedTransactions];
-                htl?.sort((a: Transaction, b: Transaction) => {
-                  if (a.amount.value < b.amount.value) {
-                    return -1;
-                  }
-                  if (a.amount.value > b.amount.value) {
-                    return 1;
-                  }
-                  return 0;
-                });
+      {loading ? (
+        <S.Loading icon={faSpinner} size={"4x"} />
+      ) : (
+        <>
+          <S.ProviderWrapper>
+            <S.ProviderHeader>
+              <h1>
+                {apiData?.provider.title} - {apiData?.provider.description}
+              </h1>
+              <h1>
+                {handleAmount(
+                  apiData?.balance.amount,
+                  apiData?.balance.currency_iso
+                )}
+              </h1>
+            </S.ProviderHeader>
+            <S.AccountDetails>
+              <p>
+                <b>Sort Code:</b> {apiData?.provider.sort_code}
+              </p>
+              <p>
+                <b>Account Number:</b> {apiData?.provider.account_number}
+              </p>
+            </S.AccountDetails>
+            <S.ProviderButtons>
+              <S.ButtonAndText>
+                <S.FilterButton
+                  onClick={() => {
+                    const htl = [...selectedTransactions];
+                    htl?.sort((a: Transaction, b: Transaction) => {
+                      if (a.amount.value < b.amount.value) {
+                        return -1;
+                      }
+                      if (a.amount.value > b.amount.value) {
+                        return 1;
+                      }
+                      return 0;
+                    });
 
-                setSelectedTransactions(htl.splice(0, 10));
-              }}
-            >
-              <FontAwesomeIcon icon={faCircleDown} size="2x" />
-            </S.FilterButton>
-            <p>HTL</p>
-          </S.ButtonAndText>
-          <S.ButtonAndText>
-            <S.FilterButton
-              onClick={() => {
-                const lth = [...selectedTransactions];
-                lth?.sort((a: Transaction, b: Transaction) => {
-                  if (a.amount.value < b.amount.value) {
-                    return 1;
-                  }
-                  if (a.amount.value > b.amount.value) {
-                    return -1;
-                  }
-                  return 0;
-                });
-                setSelectedTransactions(lth.splice(0, 10));
-              }}
-            >
-              <FontAwesomeIcon icon={faCircleUp} size="2x" />
-            </S.FilterButton>
-            <p>LTH</p>
-          </S.ButtonAndText>
-          <S.ButtonAndText>
-            <S.FilterButton
-              onClick={() => {
-                setSelectedTransactions(apiData?.transactions);
-              }}
-            >
-              <FontAwesomeIcon icon={faCircleDot} size="2x" />
-            </S.FilterButton>
-            <p>All</p>
-          </S.ButtonAndText>
-        </S.ProviderButtons>
-      </S.ProviderWrapper>
-      <S.TransactionsWrapper>{renderTransactions}</S.TransactionsWrapper>
+                    setSelectedTransactions(htl.splice(0, 10));
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCircleDown} size="2x" />
+                </S.FilterButton>
+                <p>HTL</p>
+              </S.ButtonAndText>
+              <S.ButtonAndText>
+                <S.FilterButton
+                  onClick={() => {
+                    const lth = [...selectedTransactions];
+                    lth?.sort((a: Transaction, b: Transaction) => {
+                      if (a.amount.value < b.amount.value) {
+                        return 1;
+                      }
+                      if (a.amount.value > b.amount.value) {
+                        return -1;
+                      }
+                      return 0;
+                    });
+                    setSelectedTransactions(lth.splice(0, 10));
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCircleUp} size="2x" />
+                </S.FilterButton>
+                <p>LTH</p>
+              </S.ButtonAndText>
+              <S.ButtonAndText>
+                <S.FilterButton
+                  onClick={() => {
+                    setSelectedTransactions(apiData?.transactions);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faCircleDot} size="2x" />
+                </S.FilterButton>
+                <p>All</p>
+              </S.ButtonAndText>
+            </S.ProviderButtons>
+          </S.ProviderWrapper>
+          <S.TransactionsWrapper>{renderTransactions}</S.TransactionsWrapper>
+        </>
+      )}
     </S.MainPage>
   );
 };
