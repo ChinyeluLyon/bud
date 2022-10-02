@@ -44,10 +44,19 @@ const TransactionFilter = () => {
         <h1>Chinyelu's Transaction Filter</h1>
       </S.Header>
       <S.ProviderWrapper>
-        <h1>{apiData?.provider.title}</h1>
-        <h1>
-          {handleAmount(apiData?.balance.amount, apiData?.balance.currency_iso)}
-        </h1>
+        <S.ProviderHeader>
+          <h1>{apiData?.provider.title}</h1>
+          <h1>
+            {handleAmount(
+              apiData?.balance.amount,
+              apiData?.balance.currency_iso
+            )}
+          </h1>
+        </S.ProviderHeader>
+        <S.ProviderButtons>
+        <button>x</button>
+        <button>x</button>
+        <button>x</button></S.ProviderButtons>
       </S.ProviderWrapper>
       <S.TransactionsWrapper>{renderTransactions}</S.TransactionsWrapper>
     </S.MainPage>
