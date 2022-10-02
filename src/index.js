@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import App from "./components/App";
-import TsApp from "./components/TsApp.tsx";
+import TransactionFilter from "./components/TransactionFilter.tsx";
+import '../styles/globals.css'
 
-ReactDOM.render(<TsApp />, document.getElementById("root"));
+
+ReactDOM.render(<TransactionFilter />, document.getElementById("root"));
