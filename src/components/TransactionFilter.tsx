@@ -3,12 +3,17 @@ import handleAmount from "../helpers/handleAmount";
 import TransactionComponent from "./Transaction/Transaction";
 import * as S from "./TransactionFilter.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleDot,
+  faCircleUp,
+  faCircleDown,
+} from "@fortawesome/free-solid-svg-icons";
 
 const TransactionFilter = () => {
   const [apiData, setApiData] = useState<any>();
-  const [selectedTransactions, setSelectedTransactions] =
-    useState<Transaction[]>();
+  const [selectedTransactions, setSelectedTransactions] = useState<
+    Transaction[]
+  >([]);
 
   const getData = async () => {
     fetch("http://www.mocky.io/v2/5c62e7c33000004a00019b05")
@@ -34,10 +39,8 @@ const TransactionFilter = () => {
     }
   }, [apiData]);
 
-  console.log(apiData?.transactions);
-
-  const renderTransactions = selectedTransactions?.map((t) => {
-    return <TransactionComponent transaction={t} />;
+  const renderTransactions = selectedTransactions?.map((t, idx) => {
+    return <TransactionComponent key={idx} transaction={t} />;
   });
 
   return (
@@ -56,14 +59,46 @@ const TransactionFilter = () => {
           </h1>
         </S.ProviderHeader>
         <S.ProviderButtons>
-          <S.FilterButton>
-            <FontAwesomeIcon icon={faPlus} />
+          <S.FilterButton
+            onClick={() => {
+              const htl = [...selectedTransactions];
+              htl?.sort((a: Transaction, b: Transaction) => {
+                if (a.amount.value < b.amount.value) {
+                  return -1;
+                }
+                if (a.amount.value > b.amount.value) {
+                  return 1;
+                }
+                return 0;
+              });
+              setSelectedTransactions(htl);
+            }}
+          >
+            <FontAwesomeIcon icon={faCircleDown} size="2x" />
           </S.FilterButton>
-          <S.FilterButton>
-            <FontAwesomeIcon icon={faPlus} />
+          <S.FilterButton
+            onClick={() => {
+              const lth = [...selectedTransactions];
+              lth?.sort((a: Transaction, b: Transaction) => {
+                if (a.amount.value < b.amount.value) {
+                  return 1;
+                }
+                if (a.amount.value > b.amount.value) {
+                  return -1;
+                }
+                return 0;
+              });
+              setSelectedTransactions(lth);
+            }}
+          >
+            <FontAwesomeIcon icon={faCircleUp} size="2x" />
           </S.FilterButton>
-          <S.FilterButton>
-            <FontAwesomeIcon icon={faPlus} />
+          <S.FilterButton
+            onClick={() => {
+              setSelectedTransactions(apiData?.transactions);
+            }}
+          >
+            <FontAwesomeIcon icon={faCircleDot} size="2x" />
           </S.FilterButton>
         </S.ProviderButtons>
       </S.ProviderWrapper>
