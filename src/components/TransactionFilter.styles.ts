@@ -63,3 +63,24 @@ export const TransactionsWrapper = styled.div`
   flex-direction: column;
   gap: 10px;
 `;
+
+export const FilterButton = styled.button`
+  background: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    transition: 0.3s;
+    background: #ffffff5c;
+    backdrop-filter: blur(10px);
+    color: white;
+    border: solid 3px white;
+  }
+`;

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import handleAmount from "../helpers/handleAmount";
 import TransactionComponent from "./Transaction/Transaction";
 import * as S from "./TransactionFilter.styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const TransactionFilter = () => {
   const [apiData, setApiData] = useState<any>();
@@ -54,9 +56,16 @@ const TransactionFilter = () => {
           </h1>
         </S.ProviderHeader>
         <S.ProviderButtons>
-        <button>x</button>
-        <button>x</button>
-        <button>x</button></S.ProviderButtons>
+          <S.FilterButton>
+            <FontAwesomeIcon icon={faPlus} />
+          </S.FilterButton>
+          <S.FilterButton>
+            <FontAwesomeIcon icon={faPlus} />
+          </S.FilterButton>
+          <S.FilterButton>
+            <FontAwesomeIcon icon={faPlus} />
+          </S.FilterButton>
+        </S.ProviderButtons>
       </S.ProviderWrapper>
       <S.TransactionsWrapper>{renderTransactions}</S.TransactionsWrapper>
     </S.MainPage>
