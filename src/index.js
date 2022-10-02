@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
+// import App from "./components/App";
+import TsApp from "./components/TsApp.tsx";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<TsApp />, document.getElementById("root"));

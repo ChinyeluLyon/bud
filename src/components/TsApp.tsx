@@ -1,12 +1,12 @@
 import React from "react";
 
-const App = () => {
+const TsApp = () => {
   const test = 1;
   return (
     <div>
-      <h1>HI i'm the app</h1>
+      <h1>HI i'm the typescript App</h1>
     </div>
   );
 };
 
-export default App;
+export default TsApp;
