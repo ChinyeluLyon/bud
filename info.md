@@ -1,3 +1,5 @@
+## Set up
+
 - `npm init -y`
 - `npm i react`
 - `npm i react-dom`
@@ -17,3 +19,10 @@
     - makes js bundles smaller
 - `npm i html-webpack-plugin --save-dev`
     - adds bundled files to our index.html file
+
+## typescript info - [Helpful link](https://dev.to/alekseiberezkin/setting-up-react-typescript-app-without-create-react-app-oph)
+
+- extra plugins and loaders
+    - `css-loader`
+    - `mini-css-extract-plugin`
+    - `ts-loader` 
