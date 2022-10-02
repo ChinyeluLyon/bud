@@ -51,6 +51,17 @@ export const ProviderHeader = styled.div`
   width: 100%;
 `;
 
+export const AccountDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+
+  > p {
+    margin: 0;
+  }
+`;
+
 export const ProviderButtons = styled.div`
   display: flex;
   flex-direction: row;
@@ -62,6 +73,17 @@ export const TransactionsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+`;
+
+export const ButtonAndText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  text-align: center;
+  > p {
+    margin: 0;
+  }
 `;
 
 export const FilterButton = styled.button`
